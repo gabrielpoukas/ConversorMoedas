@@ -9,22 +9,18 @@ const body = document.querySelector('body');
 
 
 async function getExchangeRates(currency) {
-  
-    const url = `https://economia.awesomeapi.com.br/last/${currency}-BRL`;
+
+    const cleanCurrency = currency.trim();
+    const url = `https://economia.awesomeapi.com.br/last/${cleanCurrency}-BRL`;
 
     try {
         const response = await fetch(url);
-        
-       
-        if (!response.ok) throw new Error('Falha na conexão com a API');
-
+        if (!response.ok) throw new Error('Resposta da rede não foi ok');
         const data = await response.json();
         
-        
-        return data[`${currency}BRL`];
+        return data[`${cleanCurrency}BRL`];
     } catch (error) {
-        console.error("Erro ao buscar dados:", error);
-        alert("Erro ao buscar cotação. Tente novamente mais tarde.");
+        console.error("Erro detalhado no Fetch:", error);
         return null;
     }
 }
