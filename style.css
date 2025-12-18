@@ -30,6 +30,9 @@ justify-content: center;
 align-items: center;
 transition: all 0.4s ease;
 padding-bottom: 80px;
+overflow-x: hidden; 
+overflow-y: hidden;
+
 
 }
 
