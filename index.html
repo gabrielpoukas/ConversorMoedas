@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Conversor de Moedas</title>
+</head>
+<body>
+    
+     <div class="container">
+
+
+            <header>
+
+                <h1>💱 Conversor de Moedas</h1>
+                <button id="toggle-theme-btn" class="btn-theme">🌞 Modo Dia</button>
+            </header>
+
+            <main class="converter-box">
+
+                <div class="input-group">
+
+                    <label for="amount">Valor em R$:</label>
+                    <input type="number"id="amount" placeholder="Ex: 100.00" step="0.01">
+                </div>
+
+                <div class="input-group">
+                    <label for="currency-select">Converter para:</label>
+                    <select id="currency-select">
+
+                        <option value="USD">Dólar Americano (USD)</option>
+                        <option value="EUR">EURO (EUR)</option>
+                        <option value="BTC">Bitcoin (BTC)</option>
+                    </select>
+                </div>
+
+                <button id="convert-btn">Converter Agora</button>
+
+                <div id="result-area" class="hidden">
+
+                    <p id="conversion-text"> Resultado aparecerá aqui</p>
+                    <small id="update-time">Atualizado em: --:--</small>
+                </div>
+
+            </main>
+
+     </div>    
+
+
+     <footer>
+
+        Desenvolvido Por: <a href="https://www.linkedin.com/in/gabriel-alexandre-marques-cardoso-0041101ab/" target="_blank">Gabriel Cardoso</a>
+
+
+     </footer>
+
+
+
+
+
+
+    <script src="script.js"></script>
+</body>
+</html>
