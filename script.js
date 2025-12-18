@@ -26,34 +26,35 @@ async function getExchangeRates(currency) {
 }
 
 async function convertCurrency() {
+    const valueBRL = parseFloat(amountInput.value);
+    const targetCurrency = currencySelect.value;
 
-const valueBRL = parseFloat(amountInput.value);
-const targetCurrency = currencySelect.value;
+    if (isNaN(valueBRL) || valueBRL <= 0) {
+        alert("Por favor, insira um valor válido.");
+        return;
+    }
 
-if (isNaN(valueBRL) || valueBRL <= 0 ) {
+    convertBtn.textContent = "Buscando cotação...";
+    convertBtn.disabled = true;
 
-alert("Por favor, insira um valor válido acima de 0.");
-return;
+    try {
+        const rateData = await getExchangeRates(targetCurrency);
 
-}
-
-convertBtn.textContent = "Buscando cotação...";
-convertBtn.disabled = true;
-
-const rateData = await getExchangeRates(targetCurrency);
-
-if(rateData){
-
-    const rate = parseFloat(rateData.bid);
-    const result = valueBRL / rate;
-
-    displayResult(result , targetCurrency,rateData.create_date);
-
-}
-
-convertBtn.textContent="Converter Agora";
-convertBtn.disabled = false;
-
+        if (rateData) {
+            const rate = parseFloat(rateData.bid);
+            const result = valueBRL / rate;
+            displayResult(result, targetCurrency, rateData.create_date);
+        } else {
+            alert("Erro: Não recebemos dados da cotação. Verifique sua conexão.");
+        }
+    } catch (error) {
+        console.error("Erro na lógica de conversão:", error);
+        alert("Ocorreu um erro inesperado.");
+    } finally {
+       
+        convertBtn.textContent = "Converter Agora";
+        convertBtn.disabled = false;
+    }
 }
 
 function displayResult (result, currency, date) {
