@@ -153,7 +153,7 @@ input::placeholder {
 
 .light-theme input, 
 .light-theme select {
-    color: #1e293b !important; /* Azul escuro para garantir leitura no fundo claro */
+    color: #1e293b !important; 
     background: #ffffff;
 }
 

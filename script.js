@@ -1,4 +1,3 @@
-
 const amountInput = document.querySelector('#amount');
 const currencySelect = document.querySelector('#currency-select');
 const convertBtn = document.querySelector('#convert-btn');
@@ -22,10 +21,12 @@ async function convertCurrency() {
 
     try {
         const apiUrl = `https://economia.awesomeapi.com.br/last/${targetCurrency}-BRL`;
-        const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(apiUrl)}`;
 
-        const response = await fetch(proxyUrl);
-        if (!response.ok) throw new Error('Falha no Proxy');
+        const response = await fetch(apiUrl);
+        
+        if (!response.ok) {
+            throw new Error(`Erro na requisição: ${response.status}`);
+        }
         
         const data = await response.json();
         const rateInfo = data[`${targetCurrency}BRL`];
@@ -37,8 +38,8 @@ async function convertCurrency() {
         }
 
     } catch (error) {
-        console.error(error);
-        alert("Bloqueio persistente detectado. Dica: Tente abrir o site no navegador Google Chrome padrão ou desative temporariamente seu antivírus.");
+        console.error("Erro detalhado:", error);
+        alert("Não foi possível obter a cotação. Verifique sua conexão ou tente novamente mais tarde.");
     } finally {
         convertBtn.textContent = "Converter Agora";
         convertBtn.disabled = false;
